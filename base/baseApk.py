@@ -36,6 +36,7 @@ class ApkInfo():
 
     # 得到应用名字
     def getApkName(self):
+        print('--------------'+self.apkPath)
         p = subprocess.Popen("aapt dump badging %s" % self.apkPath, stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE,
                              stdin=subprocess.PIPE, shell=True)

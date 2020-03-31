@@ -1,7 +1,7 @@
 from base.baseRunner import ParametrizedTestCase
 import os
 import sys
-from pageObject.Home.FirstOpenPage import FirstOpenPage
+from pageObject.home.firstOpenPage import FirstOpenPage
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )

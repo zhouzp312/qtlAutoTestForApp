@@ -11,7 +11,7 @@ class FirstOpenPage:
     def __init__(self, kwargs):
         _init = {"driver": kwargs["driver"], "test_msg": getYam(kwargs["path"]), "device": kwargs["device"],
                  "logTest": kwargs["logTest"], "caseName": kwargs["caseName"]}
-        self.page = Pages.PagesObjects(_init)
+        self.page = page.PagesObjects(_init)
 
     def operate(self):  # 操作步骤
         self.page.operate()

@@ -9,38 +9,53 @@ PATH = lambda p: os.path.abspath(
 )
 
 
+# def appium_testcase(devices):
+#     desired_caps = {}
+#     if str(devices["platformName"]).lower() == "android":
+#         # desired_caps['appPackage'] = devices["appPackage"]
+#         # desired_caps['appActivity'] = devices["appActivity"]
+#         desired_caps['udid'] = devices["deviceName"]
+#         desired_caps['app'] = devices["app"]
+#         # desired_caps["recreateChromeDriverSessions"] = "True"
+#         # 解决多次切换到webview报错问题，每次切换到非chrome-Driver时kill掉session 注意这个设置在appium 1.5版本上才做了处理
+#     else:
+#         # desired_caps['automationName'] = devices["automationName"] # Xcode8.2以上无UIAutomation,需使用XCUITest
+#         desired_caps['bundleId'] = devices["bundleId"]
+#         desired_caps['udid'] = devices["udid"]
+#         # desired_caps['newCommandTimeout'] = 3600  # 1 hour
+#
+#     desired_caps['platformVersion'] = devices["platformVersion"]
+#     desired_caps['platformName'] = devices["platformName"]
+#     desired_caps["automationName"] = devices['automationName']
+#     desired_caps['deviceName'] = devices["deviceName"]
+#     #desired_caps["noReset"] = "True"
+#     #desired_caps['noSign'] = "True"
+#     #desired_caps["unicodeKeyboard"] = "True"
+#     #desired_caps["resetKeyboard"] = "True"
+#     desired_caps["systemPort"] = devices["systemPort"]
+#
+#     # desired_caps['app'] = devices["app"]
+#     remote = "http://127.0.0.1:" + str(devices["port"]) + "/wd/hub"
+#     # remote = "http://127.0.0.1:" + "4723" + "/wd/hub"
+#     driver = webdriver.Remote(remote, desired_caps)
+#     return driver
 def appium_testcase(devices):
     desired_caps = {}
-
-    if str(devices["platformName"]).lower() == "android":
-        # desired_caps['appPackage'] = devices["appPackage"]
-        # desired_caps['appActivity'] = devices["appActivity"]
-        desired_caps['udid'] = devices["deviceName"]
-        desired_caps['app'] = devices["app"]
-        # desired_caps["recreateChromeDriverSessions"] = "True"
-        # 解决多次切换到webview报错问题，每次切换到非chrome-Driver时kill掉session 注意这个设置在appium 1.5版本上才做了处理
-    else:
-        # desired_caps['automationName'] = devices["automationName"] # Xcode8.2以上无UIAutomation,需使用XCUITest
-        desired_caps['bundleId'] = devices["bundleId"]
-        desired_caps['udid'] = devices["udid"]
-        # desired_caps['newCommandTimeout'] = 3600  # 1 hour
-
+    desired_caps['udid'] = devices["deviceName"]
+    desired_caps['app'] = devices["app"]
     desired_caps['platformVersion'] = devices["platformVersion"]
     desired_caps['platformName'] = devices["platformName"]
     desired_caps["automationName"] = devices['automationName']
     desired_caps['deviceName'] = devices["deviceName"]
-    desired_caps["noReset"] = "True"
-    desired_caps['noSign'] = "True"
-    desired_caps["unicodeKeyboard"] = "True"
-    desired_caps["resetKeyboard"] = "True"
+    #desired_caps["noReset"] = "True"
+    #desired_caps['noSign'] = "True"
+    #desired_caps["unicodeKeyboard"] = "True"
+    #desired_caps["resetKeyboard"] = "True"
     desired_caps["systemPort"] = devices["systemPort"]
-
-    # desired_caps['app'] = devices["app"]
-    remote = "http://127.0.0.1:" + str(devices["port"]) + "/wd/hub"
-    # remote = "http://127.0.0.1:" + "4723" + "/wd/hub"
+    #remote = "http://127.0.0.1:" + str(devices["port"]) + "/wd/hub"
+    remote = "http://127.0.0.1:4723/wd/hub"
     driver = webdriver.Remote(remote, desired_caps)
     return driver
-
 
 class ParametrizedTestCase(unittest.TestCase):
     """ TestCase classes that want to be parametrized should

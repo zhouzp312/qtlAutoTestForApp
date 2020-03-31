@@ -1,6 +1,6 @@
 import sys
 import platform
-from random import random
+import random
 from base.baseAndroidPhone import *
 from base.baseAdb import *
 from base.baseRunner import ParametrizedTestCase
@@ -12,6 +12,7 @@ from base.baseInit import init, mk_file
 from base.baseStatistics import countDate, writeExcel
 from datetime import datetime
 from base.baseApk import ApkInfo
+from appium import webdriver
 
 
 PATH = lambda p: os.path.abspath(
@@ -19,13 +20,21 @@ PATH = lambda p: os.path.abspath(
 )
 
 
+# def kill_adb():
+#     if platform.system() == "Windows":
+#         # os.popen("taskkill /f /im adb.exe")
+#         os.system(PATH("../app/kill5037.bat"))
+#     else:
+#         os.popen("killall adb")
+#     os.system("adb start-server")
 def kill_adb():
     if platform.system() == "Windows":
         # os.popen("taskkill /f /im adb.exe")
-        os.system(PATH("../app/kill5037.bat"))
+        os.system(PATH("adb kill-server"))
     else:
         os.popen("killall adb")
-    os.system("adb start-server")
+    os.system("adb connect 127.0.0.1:7555")
+
 
 
 def runnerPool(getDevices):
@@ -67,7 +76,7 @@ def runnerCaseApp(devices):
 if __name__ == '__main__':
 
     kill_adb()
-
+    # 获取device
     devicess = AndroidDebugBridge().attached_devices()
     if len(devicess) > 0:
         mk_file()
@@ -79,8 +88,7 @@ if __name__ == '__main__':
             app["port"] = str(random.randint(4700, 4900))
             app["bport"] = str(random.randint(4700, 4900))
             app["systemPort"] = str(random.randint(4700, 4900))
-            app["app"] = PATH("../app/com.ximalaya.ting.android.apk")  # 测试的app路径,喜马拉雅app
-
+            app["app"] = PATH("../app/qutanlu-default.apk")  # 测试的app路径
             l_devices.append(app)
 
         appium_server = AppiumServer(l_devices)
